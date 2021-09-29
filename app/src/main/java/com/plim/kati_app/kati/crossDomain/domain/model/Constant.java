@@ -60,7 +60,7 @@ public class Constant { // ㅎㅎ Resource 로 옮겨조...
     public static final String JSONOBJECT_SECOND_EMAIL_MESSAGE = "secondEmail";
     public static final String JSONOBJECT_AFTER_PASSWORD_MESSAGE = "afterPassword";
     public static final String JSONOBJECT_BEFORE_PASSWORD_MESSAGE = "beforePassword";
-    public static final String URL = "http://13.124.55.59:8080/";
+    public static final String URL = "http://3.38.97.234:8000/core-service/";
 
     public static final String KATI_DIALOG_CONFIRM = "확인";
     public static final String KATI_DIALOG_CANCEL = "취소";

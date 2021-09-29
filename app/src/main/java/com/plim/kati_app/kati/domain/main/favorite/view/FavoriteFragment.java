@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -123,6 +124,7 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
         public void onFailResponse(Response<List<UserFavoriteResponse>> response) {
             try {
                 JSONObject jObjError = new JSONObject(response.errorBody().string());
+                Log.i("찜 보기 화면",jObjError.toString());
                 Toast.makeText(getContext(), jObjError.getString(JSONOBJECT_ERROR_MESSAGE), Toast.LENGTH_LONG).show();
 //                moveToLogOutActivity();
             } catch (Exception e) {
@@ -143,7 +145,6 @@ public class FavoriteFragment extends KatiLoginCheckViewModelFragment {
      * method
      */
     private void getUserFavorite() {
-
         KatiRetrofitTool.getAPIWithAuthorizationToken(dataset.get(KatiEntity.EKatiData.AUTHORIZATION)).getUserFavorite()
                 .enqueue(JSHRetrofitTool.getCallback(new UserFavoriteResponseCallback()));
     }

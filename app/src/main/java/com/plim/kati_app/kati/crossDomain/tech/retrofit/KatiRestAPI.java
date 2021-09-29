@@ -87,7 +87,7 @@ public interface KatiRestAPI {
 
 
 
-    @GET("/api/v1/food/searchFood")
+    @GET("api/v1/food/searchFood")
     Call<FindFoodBySortingResponse> getNameFoodListBySorting(
             @Query("pageNo") int pageNo,
             @Query("size") int size,
@@ -97,7 +97,7 @@ public interface KatiRestAPI {
             @Query("allergies") List<String> allergyList
     );
 
-    @GET("/api/v1/food/searchFood")
+    @GET("api/v1/food/searchFood")
         Call<FindFoodBySortingResponse> getManufacturerFoodListBySorting(
             @Query("pageNo") int pageNo,
             @Query("size") int size,
@@ -107,7 +107,7 @@ public interface KatiRestAPI {
             @Query("allergies") List<String> allergyList
     );
 
-    @GET("/api/v1/food/searchFood")
+    @GET("api/v1/food/searchFood")
     Call<FindFoodBySortingResponse> getCategoryFood(
             @Query("pageNo") int pageNo,
             @Query("size") int size,
@@ -118,10 +118,10 @@ public interface KatiRestAPI {
     );
 
 
-    @GET("/api/v1/food/findFood/foodDetail")
+    @GET("api/v1/food/findFood/foodDetail")
     Call<FoodDetailResponse> getFoodDetailByFoodId(@Query("foodId") Long foodId);
 
-    @POST("/api/v1/food/findFood/barcode")
+    @POST("api/v1/food/findFood/barcode")
     Call<FoodDetailResponse> findByBarcode(@Body FindFoodByBarcodeRequest request);
 
     //제품 즐겨찾기
@@ -135,16 +135,16 @@ public interface KatiRestAPI {
     Call<Void> deleteFavoriteFood(@Query("foodId") Long foodId);
 
     //제품 광고
-    @GET("/api/v1/advertisement/ads")
+    @GET("api/v1/advertisement/ads")
     Call<List<AdvertisementResponse>> getAdFoodList();
 
-    @GET("/api/v1/advertisement/foodDetail")
+    @GET("api/v1/advertisement/foodDetail")
     Call<FoodDetailResponse> getAdFoodDetail(@Query("adId") Long adId);
 
 
 
     //제품 리뷰
-    @GET("/readReview")
+    @GET("readReview")
     Call<ReadReviewDto> readReview(@Query("foodId") Long foodId, @Query("pageNum") int pageNum);
 
     @GET("api/v1/user/readReview")
@@ -170,12 +170,12 @@ public interface KatiRestAPI {
 
 
 
-    @GET("/api/v1/advertisement/foodDetail") Call<FoodDetailResponse> getAdvertisementFoodDetail(@Query("adId") Long adId);
+    @GET("api/v1/advertisement/foodDetail") Call<FoodDetailResponse> getAdvertisementFoodDetail(@Query("adId") Long adId);
     @GET("api/v1/advertisement/ads") Call<List<AdvertisementResponse>> getAdvertisementFoodList();
     @GET("reviewRanking") Call<List<ItemRankingResponse>> getRankingList();
-    @GET("/api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
-    @GET("/api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
-    @GET("/api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
+    @GET("api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
+    @GET("api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
+    @GET("api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
 
 }
 
