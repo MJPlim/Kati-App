@@ -2,12 +2,24 @@ package com.plim.kati_app.kati.domain.foodDetail;
 
 import android.app.Activity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.kakao.kakaolink.v2.KakaoLinkResponse;
+import com.kakao.kakaolink.v2.KakaoLinkService;
+import com.kakao.message.template.ButtonObject;
+import com.kakao.message.template.ContentObject;
+import com.kakao.message.template.FeedTemplate;
+import com.kakao.message.template.LinkObject;
+import com.kakao.message.template.SocialObject;
+import com.kakao.network.ErrorResult;
+import com.kakao.network.callback.ResponseCallback;
+import com.kakao.util.helper.log.Logger;
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
@@ -20,6 +32,9 @@ import com.plim.kati_app.kati.domain.foodDetail.model.FoodDetailResponse;
 import com.plim.kati_app.kati.domain.main.search.model.FindFoodByBarcodeRequest;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Response;
 
@@ -36,7 +51,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
 
     //associate
     //view
-    private ImageView foodImageView, starIcon;
+    private ImageView foodImageView, starIcon,kakaoIcon;
     private TextView foodNameTextView, ratingTextView, reviewCountTextView;
     private JSHInfoItem materialItem, ingredientItem, allergyItem;
     private SparkButton heartButton;
@@ -63,6 +78,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
         this.toolBar = getActivity().findViewById(R.id.toolbar);
         this.foodImageView = view.findViewById(R.id.foodItemFragment_foodImageView);
         this.starIcon = view.findViewById(R.id.foodItemFragment_starIcon);
+        this.kakaoIcon = view.findViewById(R.id.foodItemFragment_kakaotalkIcon);
 
         this.allergyItem = view.findViewById(R.id.foodItemFragment_allergy);
 
@@ -91,6 +107,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
     @Override
     protected void initializeView() {
         this.foodImageView.setOnClickListener(v -> this.changeProductImage(this.isFront));
+        this.kakaoIcon.setOnClickListener(v -> this.kakaolink());
         this.heartButton.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
@@ -265,6 +282,36 @@ public class FoodInfoFragment extends KatiFoodFragment {
         this.isFavorite = flag;
         this.heartButton.pressOnTouch(flag);
         this.heartButton.setChecked(flag);
+    }
+    //카카오링크를 통한 공유 메서드
+    public void kakaolink() {
+        FeedTemplate params = FeedTemplate
+                .newBuilder(ContentObject.newBuilder(this.foodDetailResponse.getFoodName(),
+                        this.foodDetailResponse.getFoodImageAddress(),
+                        LinkObject.newBuilder().setWebUrl("https://www.naver.com")   //링크는 카카오 developer 에서 등록한 링크만 사용가능하다 아니면 무반응
+                                .setMobileWebUrl("https://www.naver.com").build())
+                        .setDescrption(this.foodDetailResponse.getManufacturerName())
+                        .build())
+                .setSocial(SocialObject.newBuilder().setViewCount(this.foodDetailResponse.getViewCount().intValue()).setCommentCount(this.foodDetailResponse.getReviewCount())
+                        .build())
+                .addButton(new ButtonObject("Kati 앱에서 보기", LinkObject.newBuilder()
+                        .setWebUrl("https://www.naver.com")
+                        .setMobileWebUrl("https://www.naver.com")
+                        .setAndroidExecutionParams("food_id="+this.foodDetailResponse.getFoodId())
+                        .build()))
+                .build();
+        KakaoLinkService.getInstance().sendDefault(getContext(), params, new ResponseCallback<KakaoLinkResponse>() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                //실패하면 할일
+                Toast.makeText(getContext(),"공유에 실패하였습니다",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(KakaoLinkResponse result) {
+                //성공하면 할일
+            }
+        });
     }
 
 

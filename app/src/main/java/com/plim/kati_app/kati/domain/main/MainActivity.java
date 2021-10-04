@@ -1,5 +1,8 @@
 package com.plim.kati_app.kati.domain.main;
 
+import android.content.Intent;
+import android.util.Log;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,8 +19,12 @@ import com.plim.kati_app.jshCrossDomain.tech.google.JSHGoogleMap;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 
+import com.plim.kati_app.kati.domain.foodDetail.FoodDetailActivity;
 import com.plim.kati_app.kati.domain.main.category.CategoryFoodDetailFragment;
 import com.plim.kati_app.kati.domain.main.home.HomeFragment;
+
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
 public class MainActivity extends KatiViewModelActivity {
 

@@ -110,6 +110,20 @@
                     app:layout_constraintStart_toEndOf="@+id/foodItemFragment_ratingTextView"
                     app:layout_constraintTop_toTopOf="@+id/foodItemFragment_ratingTextView" />
 
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/foodItemFragment_kakaotalkIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="30dp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/kakao_icon"
+                     />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

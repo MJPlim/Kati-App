@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 public class Constant { // ㅎㅎ Resource 로 옮겨조...
 
+
     //회원가입
     public static final String AUTHORIZATION ="Authorization";
 
