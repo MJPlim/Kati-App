@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.plim.kati_app" >
+    <!--queries에 카카오톡 패키지 추가-->
+    <queries>
+        <package android:name="com.kakao.talk" />
+    </queries>
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
