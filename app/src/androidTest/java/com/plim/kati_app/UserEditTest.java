@@ -48,8 +48,6 @@ public class UserEditTest {
 
     @Test
     public void editNameTest(){
-        onView(withId(R.id.action_mykati)).perform(click());
-        onView(withId(R.id.myKatiFragment_myInfoLayout)).perform(click());
         onView(withId(R.id.myInfoEditFragment_editNameButton)).perform(click());
         onView(withId(R.id.nameEditActivity_editText)).perform(typeText(TEST_NAME), closeSoftKeyboard());
         onView(withId(R.id.nameEditActivity_submitButton)).perform(click());
