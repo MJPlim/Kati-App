@@ -1,17 +1,23 @@
 package com.plim.kati_app.kati.domain.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.plim.kati_app.R;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitCallback;
 import com.plim.kati_app.jshCrossDomain.tech.retrofit.JSHRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
 import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiHasTitleActivity;
+import com.plim.kati_app.kati.crossDomain.domain.view.activity.KatiLoginCheckViewModelActivity;
 import com.plim.kati_app.kati.crossDomain.domain.view.dialog.KatiDialog;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.domain.findId.FindIdActivity;
@@ -28,7 +34,7 @@ import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_SEAR
 /**
  * 로그인 액티비티.
  */
-public class LoginActivity extends KatiHasTitleActivity {
+public class LoginActivity extends KatiLoginCheckViewModelActivity {
 
     //associate
     //view
@@ -61,21 +67,26 @@ public class LoginActivity extends KatiHasTitleActivity {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        new BubbleEffector(this.findViewById(R.id.background)).start();
+    }
+
+    @Override
     protected void associateView() {
-        super.associateView();
         this.dialogs = new Vector<>();
-        this.emailAddress = this.findViewById(R.id.loginActivity_emailTextView);
-        this.password = this.findViewById(R.id.loginActivity_passwordTextView);
-        this.loginButton = this.findViewById(R.id.loginActivity_loginButton);
-        this.autologinCheckBox = this.findViewById(R.id.loginActivity_autoLoginCheckBox);
-        this.findId = this.findViewById(R.id.loginActivity_findIdTextView);
-        this.findPw = this.findViewById(R.id.loginActivity_findPasswordTextView);
-        this.signIn = this.findViewById(R.id.loginActivity_registerTextView);
+        View view = this.findViewById(R.id.constraintLayout);
+        this.emailAddress = view.findViewById(R.id.loginActivity_emaiEditText);
+        this.password = view.findViewById(R.id.loginActivity_passwordEditText);
+        this.loginButton = view.findViewById(R.id.loginActivity_loginButton);
+        this.autologinCheckBox = view.findViewById(R.id.loginActivity_autoLoginCheckbox);
+        this.findId = view.findViewById(R.id.loginActivity_findIdTextView);
+        this.findPw = view.findViewById(R.id.loginActivity_findPWTextView);
+        this.signIn = view.findViewById(R.id.loginActivity_signInTextView);
     }
 
     @Override
     protected void initializeView() {
-        super.initializeView();
         this.findId.setOnClickListener(v -> this.startActivity(new Intent(this, FindIdActivity.class)));
         this.findPw.setOnClickListener(v -> this.startActivity(new Intent(this, FindPasswordActivity.class)));
         this.signIn.setOnClickListener(v -> this.startActivity(new Intent(this, SignUpActivity.class)));
@@ -97,11 +108,6 @@ public class LoginActivity extends KatiHasTitleActivity {
     @Override
     protected void katiEntityUpdatedAndNoLogin() {
 
-    }
-
-    @Override
-    protected String getTitleContent() {
-        return "";
     }
 
 
