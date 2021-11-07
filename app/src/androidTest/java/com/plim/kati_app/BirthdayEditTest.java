@@ -1,12 +1,16 @@
 package com.plim.kati_app;
 
+import android.widget.DatePicker;
+
 import androidx.test.espresso.PerformException;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
 import com.plim.kati_app.kati.domain.main.MainActivity;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,10 +18,13 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.contrib.PickerActions.setDate;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
@@ -25,7 +32,7 @@ import static org.hamcrest.core.AllOf.allOf;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class BirthdayEditTest {
-    private String TEST_BIRTHDAY="1980-02-01";
+    private String TEST_BIRTHDAY="1995-07-11";
 
 
     @Rule
@@ -50,6 +57,7 @@ public class BirthdayEditTest {
     public void editBirthdayTest(){
         onView(withId(R.id.myInfoEditFragment_changeBirthButton)).perform(click());
         onView(withId(R.id.nameEditActivity_editText)).perform(click());
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(1995,7,11));
         onView(withText("확인")).perform(click());
         onView(withId(R.id.nameEditActivity_submitButton)).perform(click());
         onView(allOf(withId(R.id.content), isDescendantOfA(withId(R.id.myInfoEditFragment_changeBirthItem))))
