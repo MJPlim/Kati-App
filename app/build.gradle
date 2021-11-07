@@ -4,6 +4,10 @@ plugins {
 apply plugin: 'androidx.navigation.safeargs'
 android {
 
+    packagingOptions {//네이버sdk에 리드미가 있어서 충돌이 발생하여 필요.
+        exclude 'README.md'
+    }
+
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -74,6 +78,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    kotlinOptions{
+        jvmTarget="1.8"
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -81,6 +89,17 @@ android {
 }
 
 dependencies {
+    //  naverLogin
+    repositories { flatDir { dirs 'libs' } }
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/naveridlogin_android_sdk_4.2.6.aar')
+    //noinspection GradleCompatible
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+
+    // 카카오 로그인
+    implementation "com.kakao.sdk:v2-user:2.8.0"
+
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 

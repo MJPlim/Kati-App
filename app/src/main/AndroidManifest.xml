@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.plim.kati_app" >
+    package="com.plim.kati_app">
     <!--queries에 카카오톡 패키지 추가-->
     <queries>
         <package android:name="com.kakao.talk" />
@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".kati.KatiApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,17 +23,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KatiUI"
         android:usesCleartextTraffic="true"
-        tools:replace="android:allowBackup" >
-        <activity android:name=".kati.domain.nnew.categoryFilter.CategorySettingActivity" >
-        </activity>
-        <activity android:name=".kati.domain.foodDetail.FoodDetailActivity">
-        <intent-filter>
-            <data
-                android:host="kakaolink"
-            android:scheme="kakao3579cda3deb97f15d8bf2115a65afffb" />
-        </intent-filter>
-        </activity>
+        tools:replace="android:allowBackup">
+<!--        <activity android:name=".kati.domain.nnew.categoryFilter.CategorySettingActivity"></activity>-->
+<!--        <activity android:name=".kati.domain.foodDetail.FoodDetailActivity">-->
+<!--            <intent-filter>-->
+<!--                <data-->
+<!--                    android:host="kakaolink"-->
+<!--                    android:scheme="kakao3579cda3deb97f15d8bf2115a65afffb" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity android:name=".kati.domain.review.ReviewActivity" />
+        <activity android:name=".kati.domain.foodDetail.FoodDetailActivity" />
         <activity android:name=".kati.domain.setRestoreEmail.SetRestoreEmailActivity" />
         <activity android:name=".kati.domain.findId.FindIdActivity" />
         <activity android:name=".kati.domain.editSingleData.EditSingleActivity" />
@@ -54,6 +55,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAH63IC9w2B6lP4RYw05b7qAyNja8gOyjU" />
 
+        <!--        소셜공유-->
+        <!--        <meta-data-->
+        <!--            android:name="com.kakao.sdk.AppKey"-->
+        <!--            android:value="3579cda3deb97f15d8bf2115a65afffb"/>-->
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
         <activity
             android:name=".kati.domain.editPassword.view.EditPasswordActivity"
             android:label="@string/title_activity_password_edit"
@@ -63,7 +73,9 @@
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.KatiUI.NoActionBar" />
         <activity android:name=".kati.domain.main.MainActivity" />
-        <activity android:name=".kati.domain.splash.SplashActivity" >
+
+
+        <activity android:name=".kati.domain.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -72,16 +84,27 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- "kakao{YOUR_NATIVE_APP_KEY}://kakaolink" 형식의 앱 실행 스킴을 설정하는데 사용 -->
+<!--                android:scheme="kakao3579cda3deb97f15d8bf2115a65afffb"-->
                 <data
                     android:host="kakaolink"
-                    android:scheme="kakao3579cda3deb97f15d8bf2115a65afffb" />
+                    android:scheme="kakao9dba46c94bc6ff6476b93e0bbe4494ab"
+                    />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="3579cda3deb97f15d8bf2115a65afffb"/>
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao9dba46c94bc6ff6476b93e0bbe4494ab" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
