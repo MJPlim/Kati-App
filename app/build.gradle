@@ -60,6 +60,8 @@ android {
         apply plugin: 'kotlin-android'
         apply plugin: 'kotlin-android-extensions'
 
+
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -89,12 +91,19 @@ android {
 }
 
 dependencies {
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestCompile 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
+
+
     //  naverLogin
     repositories { flatDir { dirs 'libs' } }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/naveridlogin_android_sdk_4.2.6.aar')
     //noinspection GradleCompatible
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
 
 
     // 카카오 로그인
