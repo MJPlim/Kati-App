@@ -5,7 +5,7 @@ import android.content.Context;
 
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.PerformException;
-import androidx.test.espresso.intent.Intents;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.platform.app.InstrumentationRegistry;
