@@ -48,20 +48,19 @@ public class LoginTest {
     }
 
     @Test
-    public void logInTest(){
-        onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText("sh199919@gmail.com"), closeSoftKeyboard());
-        onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText("1234567"), closeSoftKeyboard());
-        onView(withId(R.id.loginActivity_loginButton)).perform(click());
-
+    public void findId(){
+        onView(withId(R.id.loginActivity_findIdTextView)).perform(click());
+        onView(withId(R.id.idFindActivity_emailEditText)).perform(typeText("sh199919@naver.com"), closeSoftKeyboard());
+        onView(withId(R.id.idFindActivity_sumbitButton)).perform(click());
+        for(int i=0; i<5; i++){
+            try{
+                onView(withText("복구 이메일으로 기존 아이디(이메일)가 발송되었습니다.")).check(matches(isDisplayed()));
+                break;
+            }catch (NoMatchingViewException e){
+                try { Thread.sleep(1000); } catch (InterruptedException ignored) { }
+            }
+        }
+        onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.activity_main)).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void logInFailTest(){
-        onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText("hello"), closeSoftKeyboard());
-        onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText("1234"), closeSoftKeyboard());
-        onView(withId(R.id.loginActivity_loginButton)).perform(click());
-
-        onView(withText("해당하는 유저가 없습니다.")).check(matches(isDisplayed()));
     }
 }
