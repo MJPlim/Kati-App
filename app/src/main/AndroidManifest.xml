@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INJECT_EVENTS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -23,8 +25,6 @@
         android:theme="@style/Theme.KatiUI"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup" >
-        <activity android:name=".kati.domain.nnew.categoryFilter.CategorySettingActivity" >
-        </activity>
         <activity android:name=".kati.domain.foodDetail.FoodDetailActivity">
         <intent-filter>
             <data

@@ -26,7 +26,7 @@ import static org.hamcrest.core.AllOf.allOf;
 @LargeTest
 public class UserEditTest {
 
-    private static final String TEST_NAME = "HAHAHA";
+    private static final String TEST_NAME = "JSH";
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
