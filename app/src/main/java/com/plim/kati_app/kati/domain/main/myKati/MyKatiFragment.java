@@ -127,7 +127,7 @@ public class MyKatiFragment extends KatiHasTitleFragment {
 
         @Override
         public void onConnectionFail(Throwable t) {
-            KatiDialog.simplerAlertDialog(getActivity(), FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, t.getMessage(), null);
+            KatiDialog.simplerAlertDialogString(getActivity(), FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, t.getMessage(), null);
         }
     }
 

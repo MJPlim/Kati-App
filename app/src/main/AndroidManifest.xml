@@ -23,13 +23,11 @@
         android:theme="@style/Theme.KatiUI"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup" >
-        <activity android:name=".kati.domain.nnew.categoryFilter.CategorySettingActivity" >
-        </activity>
         <activity android:name=".kati.domain.foodDetail.FoodDetailActivity">
         <intent-filter>
             <data
                 android:host="kakaolink"
-            android:scheme="kakao3579cda3deb97f15d8bf2115a65afffb" />
+            android:scheme="kakao9dba46c94bc6ff6476b93e0bbe4494ab" />
         </intent-filter>
         </activity>
         <activity android:name=".kati.domain.review.ReviewActivity" />
@@ -75,13 +73,13 @@
                 <!-- "kakao{YOUR_NATIVE_APP_KEY}://kakaolink" 형식의 앱 실행 스킴을 설정하는데 사용 -->
                 <data
                     android:host="kakaolink"
-                    android:scheme="kakao3579cda3deb97f15d8bf2115a65afffb" />
+                    android:scheme="kakao9dba46c94bc6ff6476b93e0bbe4494ab" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="3579cda3deb97f15d8bf2115a65afffb"/>
+            android:value="9dba46c94bc6ff6476b93e0bbe4494ab"/>
     </application>
 
 </manifest>

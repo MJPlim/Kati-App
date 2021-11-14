@@ -35,6 +35,7 @@ import com.plim.kati_app.kati.domain.findPassword.FindPasswordActivity;
 import com.plim.kati_app.kati.domain.login.model.LoginResponse;
 import com.plim.kati_app.kati.domain.login.model.NaverConnectResponse;
 import com.plim.kati_app.kati.domain.login.model.NaverLoginResponse;
+import com.plim.kati_app.kati.domain.login.model.SocialLoginRequest;
 import com.plim.kati_app.kati.domain.signUp.SignUpActivity;
 import com.plim.kati_app.kati.domain.signUp.model.SignUpRequest;
 import com.plim.kati_app.kati.domain.signUp.model.SignUpResponse;
@@ -67,8 +68,6 @@ public class LoginActivity extends KatiLoginCheckViewModelActivity {
     private OAuthLogin mOAuthLoginModule;
     private String clientId = "PnUl6zFN9pcXEHx8qlad";
     private String secret = "M0x9ds9WLh";
-    private boolean isSocialLogin = false;
-    private SocialLoginModel socialLoginData;
 
     //associate
     //view
@@ -147,14 +146,10 @@ public class LoginActivity extends KatiLoginCheckViewModelActivity {
     }
 
     @Override
-    protected void katiEntityUpdatedAndLogin() {
-
-    }
+    protected void katiEntityUpdatedAndLogin() {}
 
     @Override
-    protected void katiEntityUpdatedAndNoLogin() {
-
-    }
+    protected void katiEntityUpdatedAndNoLogin() {}
 
 
     /**
@@ -169,17 +164,13 @@ public class LoginActivity extends KatiLoginCheckViewModelActivity {
 
         @Override
         public void onFailResponse(Response<LoginResponse> response) {
-            if (!isSocialLogin) {
-                dialogs.add(KatiDialog.simplerAlertDialog(LoginActivity.this,
-                        R.string.login_failed_dialog, R.string.login_failed_content_dialog,
+                dialogs.add(KatiDialog.simplerAlertDialogString(LoginActivity.this,
+                        getString(R.string.login_failed_dialog), getString(R.string.login_failed_content_dialog),
                         (dialog, which) -> {
                             emailAddress.setText("");
                             password.setText("");
                         }
                 ));
-            } else {
-                signUp(socialLoginData);
-            }
         }
 
         @Override
@@ -189,65 +180,12 @@ public class LoginActivity extends KatiLoginCheckViewModelActivity {
     }
 
 
-    private class SignUpRequestCallback extends SimpleRetrofitCallBackImpl<SignUpResponse> {
-        public SignUpRequestCallback(Activity activity) {
-            super(activity);
-        }
-
-        @Override
-        protected String getFailMessage(JSONObject object) throws JSONException {
-            if (object.optJSONObject(JSONOBJECT_ERROR_MESSAGE) != null) {
-                JSONObject smallObject = object.getJSONObject(JSONOBJECT_ERROR_MESSAGE);
-
-                return smallObject.has(JSONOBJECT_EMAIL_MESSAGE) ? smallObject.getString(JSONOBJECT_EMAIL_MESSAGE) :
-                        smallObject.has(JSONOBJECT_PASSWORD_MESSAGE) ? smallObject.getString(JSONOBJECT_PASSWORD_MESSAGE) :
-                                smallObject.has(JSONOBJECT_NAME_MESSAGE) ? smallObject.getString(JSONOBJECT_NAME_MESSAGE) :
-                                        object.toString();
-            } else {
-                return object.has(JSONOBJECT_ERROR_MESSAGE) ? object.getString(JSONOBJECT_ERROR_MESSAGE) :
-                        object.has(JSONOBJECT_MESSAGE) ? object.getString(JSONOBJECT_MESSAGE) :
-                                object.toString();
-            }
-        }
-
-        @Override
-        public void onSuccessResponse(Response<SignUpResponse> response) {
-            showDialog(
-                    SIGN_UP_CONGRAT_TITLE_PREFIX +
-                            socialLoginData.getName() +
-                            SIGN_UP_CONGRAT_TITLE_SUFFIX,
-                    SIGN_UP_CONGRAT_MESSAGE,
-                    (dialog, which) -> onBackPressed()
-            ).show();
-        }
-
-        @Override
-        public void onConnectionFail(Throwable t) {
-            super.onConnectionFail(t);
-        }
-    }
-
-    /**
-     * method
-     */
-
-    private void signUp(SocialLoginModel socialLoginData) {
-        this.signUp(socialLoginData.getEmail(), socialLoginData.getPassword(), socialLoginData.getName());
-    }
-
-    private void signUp(String email, String password, String nickName) {
-        SignUpRequest signUpRequest = new SignUpRequest();
-        signUpRequest.setEmail(email);
-        signUpRequest.setPassword(password);
-        signUpRequest.setName(nickName);
-        KatiRetrofitTool.getAPI().signUp(signUpRequest).enqueue(JSHRetrofitTool.getCallback(new SignUpRequestCallback(this)));
-    }
-
     private class NaverLoginHandler extends OAuthLoginHandler {
         @Override
         public void run(boolean success) {
             if (success) {
-                new RequestApiTask(LoginActivity.this, mOAuthLoginModule).execute();
+                String at = mOAuthLoginModule.getAccessToken(LoginActivity.this);
+                socialLogin(at,"NAVER");
             } else {
                 String errorCode = mOAuthLoginModule.getLastErrorCode(LoginActivity.this).getCode();
                 String errorDesc = mOAuthLoginModule.getLastErrorDesc(LoginActivity.this);
@@ -255,67 +193,39 @@ public class LoginActivity extends KatiLoginCheckViewModelActivity {
                         + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
-    public class RequestApiTask extends AsyncTask<Void, Void, String> {
-        private final Context mContext;
-        private final OAuthLogin mOAuthLoginModule;
 
-        public RequestApiTask(Context mContext, OAuthLogin mOAuthLoginModule) {
-            this.mContext = mContext;
-            this.mOAuthLoginModule = mOAuthLoginModule;
-        }
 
-        @Override
-        protected void onPreExecute() {
-        }
 
-        @Override
-        protected String doInBackground(Void... params) {
-            String url = "https://openapi.naver.com/v1/nid/me";
-            String at = mOAuthLoginModule.getAccessToken(mContext);
-            return mOAuthLoginModule.requestApi(mContext, at, url);
-        }
-
-        protected void onPostExecute(String content) {
-            NaverConnectResponse response = new Gson().fromJson(content, NaverConnectResponse.class);
-            if (response.getResultcode().equals("00")) {
-                Log.d("네이버 리스폰스", response.toString());
-                NaverLoginResponse userData = response.getResponse();
-                String id = userData.getId();
-                String nickname = userData.getNickname();
-                String email = userData.getEmail();
-                id = id.substring(0, 15);
-
-                Log.i("네이버 로그인", "아이디 " + id);
-                Log.i("네이버 로그인", "이메일 " + email);
-                Log.i("네이버 로그인", "닉네임 " + nickname);
-                Log.i("네이버 로그인", "닉네임 " + nickname.length());
-                isSocialLogin = true;
-                socialLoginData = new SocialLoginModel(email, id, nickname);
-                login(email, id);
-
-                onBackPressed();
-            }
-        }
-    }
     /**
      * method
      */
+
+    private void login() {
+        this.login(this.emailAddress.getText().toString(), this.password.getText().toString());
+    }
     private void login(String email, String password) {
         LoginResponse loginRequest = new LoginResponse(email, password);
         KatiRetrofitTool.getAPIWithNullConverter().login(loginRequest).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
     }
 
-    private void login() {
-        isSocialLogin = false;
-        this.login(this.emailAddress.getText().toString(), this.password.getText().toString());
+
+    private void socialLogin(String accessToken,String loginType){
+        SocialLoginRequest request= SocialLoginRequest.builder().accessToken(accessToken).loginType(loginType).build();
+        socialLogin(request);
     }
+    private void socialLogin(SocialLoginRequest request) {
+        Log.i(request.getLoginType(),request.getAccessToken());
+        KatiRetrofitTool.getAPIWithNullConverter().socialLogin(request).enqueue(JSHRetrofitTool.getCallback(new LoginRequestCallback()));
+    }
+
+
 
     private void naverLogin() {
         this.mOAuthLoginModule.startOauthLoginActivity(this, new NaverLoginHandler());
     }
-
 
     private void kakaoLogin() {
         UserApiClient.getInstance().loginWithKakaoAccount(this, (token, throwable) -> {
@@ -323,49 +233,11 @@ public class LoginActivity extends KatiLoginCheckViewModelActivity {
                         Log.e("카카오 로그인", "로그인 실패");
                         throwable.printStackTrace();
                     } else if (token != null) {
-                        this.getAccountInfo();
+                        socialLogin(token.getAccessToken(),"KAKAO");
                     }
                     return null;
                 }
         );
-    }
-
-    private void getAccountInfo() {
-        UserApiClient.getInstance().me((user, error) -> {
-            if (error != null) {
-                Log.e("카카오 로그인", "사용자 정보 요청 실패", error);
-            } else if (user != null) {
-                String id,email="",nickname="";
-
-                id = user.getId() + "";
-
-                Account userAccount = user.getKakaoAccount();
-                if (userAccount != null) {
-                    Log.i(" 디버그","이메일 읽음!!");
-                    email = user.getKakaoAccount().getEmail();
-                    if (userAccount.getProfile() != null) {
-                        Log.i(" 디버그","닉네임 읽음!!");
-                        nickname = user.getKakaoAccount().getProfile().getNickname();
-                    }
-
-                }
-
-
-                Log.i("카카오 로그인", "사용자 정보 요청 성공" +
-                        "\n회원번호: " + id +
-                        "\n이메일:  " + email +
-                        "\n닉네임: " + nickname +
-                        "\n"+user.toString()
-
-                );
-
-                isSocialLogin = true;
-                socialLoginData = new SocialLoginModel(email, id, nickname);
-                login(email, id);
-                onBackPressed();
-            }
-            return null;
-        });
     }
 
     private void setAutoLogin() {

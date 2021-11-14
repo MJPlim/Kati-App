@@ -109,7 +109,7 @@ public class FindPasswordActivity extends KatiHasTitleActivity {
      * Method
      */
     private void showSuccessDialog(Activity activity) {
-        this.dialogVector.add(KatiDialog.simplerAlertDialog(
+        this.dialogVector.add(KatiDialog.simplerAlertDialogString(
                 activity,
                 FIND_PASSWORD_DIALOG_TITLE,
                 FIND_PASSWORD_DIALOG_MESSAGE,

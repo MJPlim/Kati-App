@@ -99,7 +99,7 @@ public class FindIdActivity extends KatiHasTitleActivity {
     }
 
     private void showCompletedDialog () {
-        KatiDialog.simplerAlertDialog(this,
+        KatiDialog.simplerAlertDialogString(this,
                 getString(R.string.find_user_email_dialog_title), getString(R.string.find_user_email_dialog_message),
                 (dialog, which) -> this.startMainActivity()
         );

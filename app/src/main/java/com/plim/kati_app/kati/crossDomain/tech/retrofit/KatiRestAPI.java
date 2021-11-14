@@ -1,7 +1,10 @@
 package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
+import android.app.DownloadManager;
+
 import com.plim.kati_app.kati.domain.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.findId.model.FindEmailResponse;
+import com.plim.kati_app.kati.domain.login.model.SocialLoginRequest;
 import com.plim.kati_app.kati.domain.main.favorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.main.myKati.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.main.myKati.allergy.model.CreateUserAllergyResponse;
@@ -69,6 +72,9 @@ public interface KatiRestAPI {
 
     @POST("login")
     Call<LoginResponse> login(@Body LoginResponse loginRequest);
+
+    @POST("oauth2-login")
+    Call<LoginResponse>socialLogin(@Body SocialLoginRequest request);
 
     @GET("api/v1/user/user-info")
     Call<UserInfoResponse> getUserInfo();
@@ -176,6 +182,7 @@ public interface KatiRestAPI {
     @GET("api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
     @GET("api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
     @GET("api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
+
 
 }
 

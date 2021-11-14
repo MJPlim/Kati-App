@@ -271,14 +271,14 @@ public class SearchFragment extends KatiSearchFragment {
     }
 
     private void showDeleteAllSearchedWordConfirm() {
-        KatiDialog.simplerAlertDialog(this.getActivity(),
+        KatiDialog.simplerAlertDialogString(this.getActivity(),
                 SEARCH_WORD_DELETE_ALL_DIALOG_TITLE, SEARCH_WORD_DELETE_ALL_DIALOG_MESSAGE,
                 (dialog, which) -> this.deleteAllSearchedWords()
         );
     }
 
     private void showDeleteSearchedWordConfirm(String value) {
-        KatiDialog.simplerAlertDialog(this.getActivity(),
+        KatiDialog.simplerAlertDialogString(this.getActivity(),
                 SEARCH_WORD_DELETE_ONE_DIALOG_TITLE,
                 SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_HEAD + value + SEARCH_WORD_DELETE_ONE_DIALOG_MESSAGE_TAIL,
                 (dialog, which) -> this.deleteSearchedWordByValue(value)
