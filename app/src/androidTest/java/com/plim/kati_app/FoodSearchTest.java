@@ -30,7 +30,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class SearchTest {
+public class FoodSearchTest {
     private String TEST_ITEM="at";
 
 
@@ -53,7 +53,7 @@ public class SearchTest {
     }
 
     @Test
-    public void editBirthdayTest(){
+    public void FoodSearchTest(){
         onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(TEST_ITEM), pressImeActionButton());
         onView(withId(R.id.searchResultFragment_resultRecyclerView)).check(matches(isDisplayed()));
     }

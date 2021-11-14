@@ -47,7 +47,7 @@ public class FoodDetailTest {
         }
     }
     @Test
-    public void editBirthdayTest(){
+    public void FoodDetailTest(){
         onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(TEST_ITEM), pressImeActionButton());
         try {
             Thread.sleep(1000);
