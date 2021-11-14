@@ -247,10 +247,12 @@ public class SearchFragment extends KatiSearchFragment {
     private void loadRecentSearchedWords() {
         if (this.searchWords != null && this.recentSearchedChipGroup != null) {
             this.recentSearchedChipGroup.removeAllViews();
+            int id=100000;
             for (String value : this.searchWords) {
                 Chip chip = new Chip(getContext());
                 chip.setTag(value);
                 chip.setText(value);
+                chip.setId(++id);
                 chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.white, getContext().getTheme())));
                 chip.setChipStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.kati_middle_gray, getContext().getTheme())));
                 chip.setChipStrokeWidth(1.5f);
