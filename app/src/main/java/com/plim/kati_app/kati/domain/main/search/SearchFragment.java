@@ -115,7 +115,6 @@ public class SearchFragment extends KatiSearchFragment {
         public void onSuccessResponse(Response<List<ItemRankingResponse>> response) {
             Vector<ItemRankingResponse> itemVector = new Vector<>(response.body());
             fillRankGridLayout2(itemVector);
-
         }
     }
 
@@ -141,6 +140,7 @@ public class SearchFragment extends KatiSearchFragment {
             String foodName = itemVector.get(i).getFoodName();
 
             TextView numView = this.inflateTextView(R.layout.jsh_ranking_num, String.valueOf(i+1), foodName);
+            numView.setId(i*10012);
             TextView nameView = this.inflateTextView(R.layout.jsh_ranking_name, foodName, foodName);
 
             GridLayout.Spec rowSpec = GridLayout.spec((i<5)? i:i-5, GridLayout.FILL);
@@ -166,72 +166,72 @@ public class SearchFragment extends KatiSearchFragment {
         return textView;
     }
 
-    private void fillRankGridLayout(Vector<ItemRankingResponse> itemVector) {
-        rankGridLayout.setRowCount(5);
-        rankGridLayout.setColumnCount(2);
-        rankGridLayout.removeAllViews();
+//    private void fillRankGridLayout(Vector<ItemRankingResponse> itemVector) {
+//        rankGridLayout.setRowCount(5);
+//        rankGridLayout.setColumnCount(2);
+//        rankGridLayout.removeAllViews();
+//
+//        for (int i = 0; i < itemVector.size(); i++) {
+//
+//            ItemRankingResponse item = itemVector.get(i);
+//            String foodName = item.getFoodName();
+//            if (i == 0 || i == 5) {
+//                for (int j = i + 1; j < i + 6; j++) {
+//                    rankGridLayout.addView(createRankTextView(15, String.valueOf(j), foodName));
+//                }
+//            }
+//            rankGridLayout.addView(createRankTextView(15, foodName));
+//        }
+//
+//    }
 
-        for (int i = 0; i < itemVector.size(); i++) {
+//    private TextView createRankTextView(int size, String text) {
+//        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+//        params.setGravity(Gravity.LEFT);
+//        return this.createRankTextView(params, size, text);
+//    }
+//
+//    private TextView createRankTextView(int size, String text, String tag) {
+//        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+//        params.setGravity(Gravity.CENTER);
+//        return this.createRankTextView(params, size, text, tag);
+//    }
 
-            ItemRankingResponse item = itemVector.get(i);
-            String foodName = item.getFoodName();
-            if (i == 0 || i == 5) {
-                for (int j = i + 1; j < i + 6; j++) {
-                    rankGridLayout.addView(createRankTextView(15, String.valueOf(j), foodName));
-                }
-            }
-            rankGridLayout.addView(createRankTextView(15, foodName));
-        }
-
-    }
-
-    private TextView createRankTextView(int size, String text) {
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-        params.setGravity(Gravity.LEFT);
-        return this.createRankTextView(params, size, text);
-    }
-
-    private TextView createRankTextView(int size, String text, String tag) {
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-        params.setGravity(Gravity.CENTER);
-        return this.createRankTextView(params, size, text, tag);
-    }
-
-    private TextView createRankTextView(GridLayout.LayoutParams params, int size, String text) {
-        int paddingVertical = 10;
-        int paddingHorizontal = 25;
-        LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-        TextView textView = (TextView) inflater.inflate(R.layout.jsh_ranking_name, null);
-        textView.setText(text);
-        textView.setTag(text);
-//        textView.setLayoutParams(params);
-        textView.setOnClickListener(setSearchTextListener);
-//        textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
-//        textView.setTextColor(getResources().getColor(R.color.black, getContext().getTheme()));
-//        textView.setTextSize(size);
-//        textView.setWidth(600);
-//        textView.setMaxWidth(600);
-//        textView.setMaxLines(1);
-//        textView.setEllipsize(TextUtils.TruncateAt.END);
-        return textView;
-    }
-
-    // 12345
-    private TextView createRankTextView(GridLayout.LayoutParams params, int size, String text, String tag) {
-        int paddingVertical = 10;
-        int paddingHorizontal = 10;
-        LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-        TextView textView = (TextView) inflater.inflate(R.layout.jsh_ranking_num, null);
-        textView.setText(text);
-        textView.setTag(tag);
-//        textView.setWidth(0);
-//        textView.setLayoutParams(params);
-        textView.setOnClickListener(setSearchTextListener);
-//        textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
-//        textView.setTextColor(getResources().getColor(R.color.black, getContext().getTheme()));
-//        textView.setTextSize(size);
-        return textView;
-    }
+//    private TextView createRankTextView(GridLayout.LayoutParams params, int size, String text) {
+//        int paddingVertical = 10;
+//        int paddingHorizontal = 25;
+//        LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+//        TextView textView = (TextView) inflater.inflate(R.layout.jsh_ranking_name, null);
+//        textView.setText(text);
+//        textView.setTag(text);
+////        textView.setLayoutParams(params);
+//        textView.setOnClickListener(setSearchTextListener);
+////        textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
+////        textView.setTextColor(getResources().getColor(R.color.black, getContext().getTheme()));
+////        textView.setTextSize(size);
+////        textView.setWidth(600);
+////        textView.setMaxWidth(600);
+////        textView.setMaxLines(1);
+////        textView.setEllipsize(TextUtils.TruncateAt.END);
+//        return textView;
+//    }
+//
+//    // 12345
+//    private TextView createRankTextView(GridLayout.LayoutParams params, int size, String text, String tag) {
+//        int paddingVertical = 10;
+//        int paddingHorizontal = 10;
+//        LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+//        TextView textView = (TextView) inflater.inflate(R.layout.jsh_ranking_num, null);
+//        textView.setText(text);
+//        textView.setTag(tag);
+////        textView.setWidth(0);
+////        textView.setLayoutParams(params);
+//        textView.setOnClickListener(setSearchTextListener);
+////        textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
+////        textView.setTextColor(getResources().getColor(R.color.black, getContext().getTheme()));
+////        textView.setTextSize(size);
+//        return textView;
+//    }
 
     private boolean doSearchStart(View view) {
         String searchText = this.searchFieldEditText.getText().toString();
