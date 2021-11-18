@@ -29,6 +29,7 @@ import com.plim.kati_app.kati.crossDomain.domain.view.fragment.KatiFoodFragment;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.KatiRetrofitTool;
 import com.plim.kati_app.kati.crossDomain.tech.retrofit.SimpleRetrofitCallBackImpl;
 import com.plim.kati_app.kati.domain.foodDetail.model.FoodDetailResponse;
+import com.plim.kati_app.kati.domain.main.search.model.AdvertisementDetailResponse;
 import com.plim.kati_app.kati.domain.main.search.model.FindFoodByBarcodeRequest;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
@@ -165,6 +166,19 @@ public class FoodInfoFragment extends KatiFoodFragment {
 
     }
 
+    private class AdvertisementFoodDetailRequestCallback extends SimpleRetrofitCallBackImpl<AdvertisementDetailResponse> {
+        public AdvertisementFoodDetailRequestCallback(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onSuccessResponse(Response<AdvertisementDetailResponse> response) {
+            foodDetailResponse = response.body().getFood();
+            saveFoodDetail();
+        }
+
+    }
+
     /**
      * callback
      */
@@ -208,7 +222,7 @@ public class FoodInfoFragment extends KatiFoodFragment {
         if (!isAd) {
             KatiRetrofitTool.getAPI().getFoodDetailByFoodId(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
         } else {
-            KatiRetrofitTool.getAPI().getAdFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
+            KatiRetrofitTool.getAPI().getAdFoodDetail(this.foodId).enqueue(JSHRetrofitTool.getCallback(new AdvertisementFoodDetailRequestCallback(this.getActivity())));
         }
     }
 

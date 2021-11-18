@@ -1,5 +1,7 @@
 package com.plim.kati_app.kati.domain.main.search.model;
 
+import com.plim.kati_app.kati.domain.foodDetail.model.FoodDetailResponse;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,8 +9,8 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class AdvertisementResponse {
+public class AdvertisementDetailResponse {
     private final Long id;
-    private final FoodResponse food;
+    private final FoodDetailResponse food;
     private final Long impression;
 }

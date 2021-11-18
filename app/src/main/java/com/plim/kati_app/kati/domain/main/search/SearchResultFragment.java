@@ -247,7 +247,7 @@ public class SearchResultFragment extends KatiSearchFragment {
 
 
     private void loadAdvertisement() {
-        KatiRetrofitTool.getAPI().getAdFoodList().enqueue(JSHRetrofitTool.getCallback(new AdListRequestCallback(getActivity())));
+        KatiRetrofitTool.getAPI().getAdFoodList(3).enqueue(JSHRetrofitTool.getCallback(new AdListRequestCallback(getActivity())));
     }
 
     private void loadMore() {
