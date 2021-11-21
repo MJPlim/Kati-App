@@ -28,6 +28,9 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static com.plim.kati_app.testUtil.TestTool.RECENT_SEARCH_TEST_SEARCH_WORD_1;
+import static com.plim.kati_app.testUtil.TestTool.RECENT_SEARCH_TEST_SEARCH_WORD_2;
+import static com.plim.kati_app.testUtil.TestTool.RECENT_SEARCH_TEST_SEARCH_WORD_3;
 import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
@@ -45,24 +48,22 @@ public class recentSearchTest {
 
     @Test
     public void doClickAndCheckSearchedAndAdded() throws InterruptedException {
-        String searchWord = "pot";
-        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(searchWord),pressImeActionButton());
+        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(RECENT_SEARCH_TEST_SEARCH_WORD_1),pressImeActionButton());
         onView(withId(R.id.action_search)).perform(click());
-        onView(withText(searchWord)).check(matches(isDisplayed()));
+        onView(withText(RECENT_SEARCH_TEST_SEARCH_WORD_1)).check(matches(isDisplayed()));
 
         onView(withId(100001)).check(matches(isDisplayed()));
     }
 
     @Test
     public void deleteOneAndCheckDeleted() throws UiObjectNotFoundException {
-        String searchWord = "pot",searchWord2="a",searchWord3="b";
-        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(searchWord),pressImeActionButton());
+        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(RECENT_SEARCH_TEST_SEARCH_WORD_1),pressImeActionButton());
         onView(withId(R.id.action_search)).perform(click());
 
-        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(searchWord2),pressImeActionButton());
+        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(RECENT_SEARCH_TEST_SEARCH_WORD_2),pressImeActionButton());
         onView(withId(R.id.action_search)).perform(click());
 
-        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(searchWord3),pressImeActionButton());
+        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(RECENT_SEARCH_TEST_SEARCH_WORD_3),pressImeActionButton());
         onView(withId(R.id.action_search)).perform(click());
 
         onView(withId(100003)).perform(new ClickCloseIconAction());
@@ -72,15 +73,14 @@ public class recentSearchTest {
             button.click();
         }
 
-        onView(withText(searchWord)).check(doesNotExist());
+        onView(withText(RECENT_SEARCH_TEST_SEARCH_WORD_1)).check(doesNotExist());
     }
 
 
 
     @Test
     public void deleteAllAndCheckDeleted() {
-        String searchWord = "pot";
-        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(searchWord),pressImeActionButton());
+        onView(withId(R.id.searchFragment_searchFieldEditText)).perform(typeText(RECENT_SEARCH_TEST_SEARCH_WORD_1),pressImeActionButton());
         onView(withId(R.id.action_search)).perform(click());
         onView(withId(R.id.searchFragment_deleteTextView)).perform(click());
         onView(withId(100001)).check(doesNotExist());

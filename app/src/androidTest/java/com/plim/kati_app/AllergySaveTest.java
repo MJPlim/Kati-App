@@ -24,6 +24,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static com.plim.kati_app.testUtil.TestTool.USER_EMAIL_YEEUN;
+import static com.plim.kati_app.testUtil.TestTool.USER_PASSWORD_YEEUN;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -42,8 +44,8 @@ public class AllergySaveTest {
             //로그인이 되어 있지 않으면, 로그인 먼저 하기.
             onView(withId(R.id.action_mykati)).perform(click());
             onView(withId(R.id.myKatiFragment_loginButton)).perform(click());
-            onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText("sh199919@gmail.com"), closeSoftKeyboard());
-            onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText("1234567"), closeSoftKeyboard());
+            onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText(USER_EMAIL_YEEUN), closeSoftKeyboard());
+            onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText(USER_PASSWORD_YEEUN), closeSoftKeyboard());
             onView(withId(R.id.loginActivity_loginButton)).perform(click());
             onView(withId(R.id.myKatiFragment_allergyItem)).perform(click());
         }
@@ -51,17 +53,15 @@ public class AllergySaveTest {
 
     @Test
     public void allergySaveTest() {
-        //두 가지 체크하기, 우유와 아몬드.
+        //호두 체크
         onView(withId(100000)).perform(click());
         Espresso.pressBack();
 
-        //다시 들어와서 우유와 아몬드 체크 확인하기.
+        //다시 들어와서 호두 체크 확인하기.
         onView(withId(R.id.myKatiFragment_allergyItem)).perform(click());
         onView(withId(100000)).check(matches(isChecked()));
 
-        //우유와 아몬드 체크 지우기.
+        //호두 체크 지우기.
         onView(withId(100000)).perform(click());
     }
-
-
 }
