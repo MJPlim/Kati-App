@@ -1,5 +1,13 @@
 package com.plim.kati_app.testUtil;
 
+import com.plim.kati_app.R;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 public class TestTool {
 
     public static final String USER_EMAIL_YEEUN="yunyen@mz.co.kr";
@@ -16,5 +24,13 @@ public class TestTool {
 
     public static void sleep() throws InterruptedException {
         Thread.sleep(1500);
+    }
+
+    public static void doLoginIfNotLogin(){
+        onView(withId(R.id.action_mykati)).perform(click());
+        onView(withId(R.id.myKatiFragment_loginButton)).perform(click());
+        onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText(USER_EMAIL_YEEUN), closeSoftKeyboard());
+        onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText(USER_PASSWORD_YEEUN), closeSoftKeyboard());
+        onView(withId(R.id.loginActivity_loginButton)).perform(click());
     }
 }

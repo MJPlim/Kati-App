@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +65,8 @@ public class ReviewManagementFragment extends KatiHasTitleFragment {
     @Override
     protected void initializeView() {
         super.initializeView();
-        View.OnClickListener listener = v -> this.deleteReview((Long)v.getTag());
+        View.OnClickListener listener = v -> {this.deleteReview((Long)v.getTag());
+        Log.e("디버그","버튼눌림"+(Long)v.getTag());};
         this.reviewRecyclerAdapter = new UserReviewRecyclerAdapter(this.getActivity(),listener);
         this.foodReviewRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         this.foodReviewRecyclerView.setAdapter(this.reviewRecyclerAdapter);
@@ -129,12 +131,13 @@ public class ReviewManagementFragment extends KatiHasTitleFragment {
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
+            Log.i(response.code()+"","실패");
         }
 
         @Override
         public void onConnectionFail(Throwable t) {
             Toast.makeText(getContext(), FOOD_SEARCH_RESULT_LIST_FRAGMENT_FAILURE_DIALOG_TITLE, Toast.LENGTH_LONG).show();
-
+            Log.i(t.getMessage(),"??페일");
         }
     }
 
