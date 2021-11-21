@@ -27,22 +27,27 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 public class UserDataEditTest {
 
+    public static final String TEST_EMAIL = "yunyen@mz.co.kr";
+    public static final String TEST_PASSWORD = "123qwea";
+
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
-    public void init() {
+    public void init() throws InterruptedException {
         try {
             //로그인이 되어 있으면 바로 알러지 설정 프레그먼트까지 이동.
             onView(withId(R.id.action_mykati)).perform(click());
+            Thread.sleep(1500);
             onView(withId(R.id.myKatiFragment_myInfoLayout)).perform(click());
         } catch (PerformException e) {
             //로그인이 되어 있지 않으면, 로그인 먼저 하기.
             onView(withId(R.id.action_mykati)).perform(click());
             onView(withId(R.id.myKatiFragment_loginButton)).perform(click());
-            onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText("sh199919@gmail.com"), closeSoftKeyboard());
-            onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText("1234567"), closeSoftKeyboard());
+            onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText(TEST_EMAIL), closeSoftKeyboard());
+            onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText(TEST_PASSWORD), closeSoftKeyboard());
             onView(withId(R.id.loginActivity_loginButton)).perform(click());
+            Thread.sleep(1500);
             onView(withId(R.id.myKatiFragment_myInfoLayout)).perform(click());
         }
     }
@@ -58,7 +63,7 @@ public class UserDataEditTest {
         onView(withText(testName)).check(matches(isDisplayed()));
     }
 
-    @Test
+
     public void birthdayDataChangeTest() {
         int year=1997,month=11, date=11;
         onView(withId(R.id.myInfoEditFragment_changeBirthButton)).perform(click());
