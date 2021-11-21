@@ -8,6 +8,13 @@ import android.preference.PreferenceManager;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject;
+import androidx.test.uiautomator.UiObjectNotFoundException;
+import androidx.test.uiautomator.UiSelector;
+
+import com.plim.kati_app.R;
 
 import org.junit.After;
 import org.junit.Before;
@@ -43,21 +50,33 @@ public abstract class KatiTestClass<T extends Activity> {
     protected abstract void beforeTest();
     protected void afterTest(){};
 
-    protected void clickByViewId(int viewId){
+    protected void clickView(int viewId){
         onView(withId(viewId)).perform(click());
     }
-
-    protected void replaceTextByViewId(int viewId, String targetText){
+    protected void replaceViewText(int viewId, String targetText){
         onView(withId(viewId)).perform(replaceText(targetText));
     }
 
     protected void checkTextExists(String targetText){
         onView(withText(targetText)).check(matches(isDisplayed()));
     }
-
     protected void checkTextNotExists(String targetText){
         onView(withText(targetText)).check(doesNotExist());
     }
 
+    protected void checkViewExists(int viewId){
+        onView(withId(viewId)).perform(click());
+    }
 
+    protected void clickText(String targetText){
+        onView(withText(targetText)).perform(click());
+    }
+
+    protected void clickDialogOption(String targetText) throws UiObjectNotFoundException {
+        UiDevice uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        UiObject button = uiDevice.findObject(new UiSelector().text(targetText));
+        if (button.exists() && button.isEnabled()) {
+            button.click();
+        }
+    }
 }

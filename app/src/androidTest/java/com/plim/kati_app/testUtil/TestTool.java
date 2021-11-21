@@ -22,8 +22,8 @@ public class TestTool {
     public static final String RECENT_SEARCH_TEST_SEARCH_WORD_2="a";
     public static final String RECENT_SEARCH_TEST_SEARCH_WORD_3="b";
 
-    public static void sleep() throws InterruptedException {
-        Thread.sleep(1500);
+    public static void sleep() {
+       try{ Thread.sleep(1500);}catch(InterruptedException e){}
     }
 
     public static void doLoginIfNotLogin(){

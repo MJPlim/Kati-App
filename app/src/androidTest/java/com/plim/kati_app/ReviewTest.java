@@ -24,19 +24,19 @@ public class ReviewTest extends KatiTestClass<MainActivity> {
     @Test
     public void createNewReview() throws InterruptedException {
         TestTool.sleep();
-        this.clickByViewId(R.id.action_search);
+        this.clickView(R.id.action_search);
         TestTool.sleep();
-        this.clickByViewId(20024);
+        this.clickView(20024);
         TestTool.sleep();
-        this.clickByViewId(R.id.newFoodItem_productNameTextView);
-        this.clickByViewId(5002);
+        this.clickView(R.id.newFoodItem_productNameTextView);
+        this.clickView(5002);
         TestTool.sleep();
-        this.clickByViewId(R.id.reviewSummaryWidget_writeReviewButton);
+        this.clickView(R.id.reviewSummaryWidget_writeReviewButton);
 
         //리뷰 작성
         TestTool.sleep();
-        this.replaceTextByViewId(R.id.reviewActivity_reviewEditText,REVIEW_TEST_REVIEW_TEXT_1);
-        this.clickByViewId(R.id.reviewActivity_submitButton);
+        this.replaceViewText(R.id.reviewActivity_reviewEditText,REVIEW_TEST_REVIEW_TEXT_1);
+        this.clickView(R.id.reviewActivity_submitButton);
 
         this.checkTextExists(REVIEW_TEST_REVIEW_TEXT_1);
     }
@@ -49,16 +49,16 @@ public class ReviewTest extends KatiTestClass<MainActivity> {
 
         //리뷰관리로 들어가기
         TestTool.sleep();
-        this.clickByViewId(R.id.myKatiFragment_reviewItem);
+        this.clickView(R.id.myKatiFragment_reviewItem);
 
         //수정버튼 클릭
         TestTool.sleep();
-        this.clickByViewId(R.id.review_edit);
+        this.clickView(R.id.review_edit);
 
         //에딧텍스트 편집
-        this.replaceTextByViewId(R.id.reviewActivity_reviewEditText,REVIEW_TEST_REVIEW_TEXT_2);
+        this.replaceViewText(R.id.reviewActivity_reviewEditText,REVIEW_TEST_REVIEW_TEXT_2);
         //등록완료 누르기
-        this.clickByViewId(R.id.reviewActivity_submitButton);
+        this.clickView(R.id.reviewActivity_submitButton);
 
         //텍스트 존재 확인
         TestTool.sleep();
@@ -72,11 +72,11 @@ public class ReviewTest extends KatiTestClass<MainActivity> {
     public void deleteNewReview() throws InterruptedException {
         //리뷰관리로 들어가기
         TestTool.sleep();
-        this.clickByViewId(R.id.myKatiFragment_reviewItem);
+        this.clickView(R.id.myKatiFragment_reviewItem);
 
         //삭제버튼 클릭
         TestTool.sleep();
-        this.clickByViewId(R.id.review_delete);
+        this.clickView(R.id.review_delete);
 
         //텍스트 존재 확인
         TestTool.sleep();
