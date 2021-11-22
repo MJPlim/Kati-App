@@ -50,14 +50,8 @@ public class FindIdTest {
         onView(withId(R.id.loginActivity_findIdTextView)).perform(click());
         onView(withId(R.id.idFindActivity_emailEditText)).perform(typeText("sh199919@naver.com"), closeSoftKeyboard());
         onView(withId(R.id.idFindActivity_sumbitButton)).perform(click());
-        for(int i=0; i<5; i++){
-            try{
-                onView(withText("복구 이메일으로 기존 아이디(이메일)가 발송되었습니다.")).check(matches(isDisplayed()));
-                break;
-            }catch (NoMatchingViewException e){
-                try { Thread.sleep(1000); } catch (InterruptedException ignored) { }
-            }
-        }
+        try { Thread.sleep(5000); } catch (InterruptedException ignored) { }
+        onView(withText("복구 이메일으로 기존 아이디(이메일)가 발송되었습니다.")).check(matches(isDisplayed()));
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.activity_main)).check(matches(isDisplayed()));
     }
