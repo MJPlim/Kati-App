@@ -71,6 +71,8 @@ public class Kakao_LoginTest {
                 new UiObject(new UiSelector().className( "android.widget.CheckBox" ).instance(0)).click();
                 Thread.sleep(1000);
                 new UiObject(new UiSelector().className( "android.widget.Button" ).instance(0)).click();
+            }else if(uiDevice.hasObject(By.text("계속하기"))){
+                new UiObject(new UiSelector().className( "android.widget.Button" ).instance(0)).click();
             }else{
                 //처음 가입하는 경우
                 new UiObject(new UiSelector().className( "android.widget.EditText" ).instance(0)).setText(email);
@@ -81,7 +83,7 @@ public class Kakao_LoginTest {
                 Thread.sleep(1000);
                 new UiObject(new UiSelector().className( "android.widget.Button" ).instance(0)).click();
             }
-            Thread.sleep(1000);
+            Thread.sleep(5000);
             onView(withId(R.id.fragment_mykati)).check(matches(isDisplayed()));
         } catch (Exception e) {
             e.printStackTrace();
