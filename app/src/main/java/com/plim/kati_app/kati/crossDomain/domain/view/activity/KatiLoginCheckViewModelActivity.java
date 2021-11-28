@@ -3,6 +3,7 @@ package com.plim.kati_app.kati.crossDomain.domain.view.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.plim.kati_app.kati.crossDomain.domain.model.KatiEntity;
@@ -58,8 +59,12 @@ public abstract class KatiLoginCheckViewModelActivity extends KatiViewModelActiv
                         (dialog, which) -> this.activity.startActivity(new Intent(this.activity, LoginActivity.class)),
                         this.getCancelListener()
                 );
-            } else
-                Toast.makeText(activity, START_REVIEW+response.code()+END_REVIEW+" "+getFailMessage(object), Toast.LENGTH_SHORT).show();
+            } else{
+                String s = START_REVIEW+response.code()+END_REVIEW+" "+getFailMessage(object);
+                Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
+                Log.e("RESTORE", s);
+            }
+
         }
 
         @Override

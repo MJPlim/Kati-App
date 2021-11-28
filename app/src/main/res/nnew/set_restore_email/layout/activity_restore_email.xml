@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_restore_email"
     android:background="@color/kati_light_gray"
     tools:context=".kati.domain.editPassword.view.EditPasswordActivity">
 

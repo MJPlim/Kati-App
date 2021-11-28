@@ -1,7 +1,10 @@
 package com.plim.kati_app.kati.crossDomain.tech.retrofit;
 
+import android.app.DownloadManager;
+
 import com.plim.kati_app.kati.domain.findId.model.FindEmailRequest;
 import com.plim.kati_app.kati.domain.findId.model.FindEmailResponse;
+import com.plim.kati_app.kati.domain.login.model.SocialLoginRequest;
 import com.plim.kati_app.kati.domain.main.favorite.model.UserFavoriteResponse;
 import com.plim.kati_app.kati.domain.main.myKati.allergy.model.CreateUserAllergyRequest;
 import com.plim.kati_app.kati.domain.main.myKati.allergy.model.CreateUserAllergyResponse;
@@ -10,6 +13,7 @@ import com.plim.kati_app.kati.domain.main.myKati.model.UserSummaryResponse;
 import com.plim.kati_app.kati.domain.main.myKati.myInfoEdit.model.GetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.main.myKati.review.model.ReadReviewResponse;
 import com.plim.kati_app.kati.domain.main.myKati.review.model.ReadUserReviewResponse;
+import com.plim.kati_app.kati.domain.main.search.model.AdvertisementDetailResponse;
 import com.plim.kati_app.kati.domain.setRestoreEmail.model.SetSecondEmailRequest;
 import com.plim.kati_app.kati.domain.setRestoreEmail.model.SetSecondEmailResponse;
 import com.plim.kati_app.kati.domain.editPassword.model.ModifyPasswordRequest;
@@ -43,6 +47,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -69,6 +74,9 @@ public interface KatiRestAPI {
 
     @POST("login")
     Call<LoginResponse> login(@Body LoginResponse loginRequest);
+
+    @POST("oauth2-login")
+    Call<LoginResponse>socialLogin(@Body SocialLoginRequest request);
 
     @GET("api/v1/user/user-info")
     Call<UserInfoResponse> getUserInfo();
@@ -135,11 +143,11 @@ public interface KatiRestAPI {
     Call<Void> deleteFavoriteFood(@Query("foodId") Long foodId);
 
     //제품 광고
-    @GET("api/v1/advertisement/ads")
-    Call<List<AdvertisementResponse>> getAdFoodList();
+    @GET("api/v1/advertisement/search")
+    Call<List<AdvertisementResponse>> getAdFoodList(@Query("size") Integer size);
 
-    @GET("api/v1/advertisement/foodDetail")
-    Call<FoodDetailResponse> getAdFoodDetail(@Query("adId") Long adId);
+    @GET("api/v1/advertisement/{adId}")
+    Call<AdvertisementDetailResponse> getAdFoodDetail(@Path("adId") Long adId);
 
 
 
@@ -176,6 +184,7 @@ public interface KatiRestAPI {
     @GET("api/v1/user/favorite/list") Call<List<UserFavoriteResponse>> getUserFavorite();
     @GET("api/v1/user/readReviewByUserID") Call<ReadUserReviewResponse<List<ReadReviewResponse>>> getUserReview();
     @GET("api/v1/user/summary") Call<UserSummaryResponse> getUserSummary();
+
 
 }
 

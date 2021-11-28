@@ -10,4 +10,5 @@ import lombok.Getter;
 public class AdvertisementResponse {
     private final Long id;
     private final FoodResponse food;
+    private final Long impression;
 }

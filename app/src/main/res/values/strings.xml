@@ -262,4 +262,5 @@
     <string name="idFindActivity_sumbitButton_text">아이디 찾기</string>
     <string name="idFindActivity_emailEditText_Text">복구 이메일</string>
     <string name="idFindActivity_toolbar_title">아이디 찾기</string>
+    <string name="kakao_app_key">9dba46c94bc6ff6476b93e0bbe4494ab</string>
 </resources>

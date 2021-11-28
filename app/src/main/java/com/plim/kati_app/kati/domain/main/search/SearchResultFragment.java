@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -64,6 +65,8 @@ public class SearchResultFragment extends KatiSearchFragment {
     //working Variable
     private boolean isLoadingMore = false;
     private boolean hasNext = true;
+    // 광고 개수 지정
+    final int advertisementSize=10;
 
     public SearchResultFragment() {
         this.vector = new Vector<>();
@@ -246,7 +249,7 @@ public class SearchResultFragment extends KatiSearchFragment {
 
 
     private void loadAdvertisement() {
-        KatiRetrofitTool.getAPI().getAdFoodList().enqueue(JSHRetrofitTool.getCallback(new AdListRequestCallback(getActivity())));
+        KatiRetrofitTool.getAPI().getAdFoodList(advertisementSize).enqueue(JSHRetrofitTool.getCallback(new AdListRequestCallback(getActivity())));
     }
 
     private void loadMore() {

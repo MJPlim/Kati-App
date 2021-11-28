@@ -72,7 +72,7 @@ public class KatiDialog extends AlertDialog.Builder {
         return kDialog;
     }
 
-    public static KatiDialog simplerAlertDialog(Activity activity, String title, String message, DialogInterface.OnClickListener listener) {
+    public static KatiDialog simplerAlertDialogString(Activity activity, String title, String message, DialogInterface.OnClickListener listener) {
         KatiDialog kDialog = new KatiDialog(activity);
         kDialog.setTitle(title);
         kDialog.setMessage(message);

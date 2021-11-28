@@ -3,6 +3,7 @@ package com.plim.kati_app.kati.domain.main.myKati.allergy;
 import android.app.Activity;
 import android.app.Service;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -127,11 +128,14 @@ public class AllergyFragment extends KatiHasTitleFragment {
     protected void setAllergyChips() {
         this.chipVector.clear();
         this.allergyChipGroup.removeAllViews();
+        int i=100000;
         for (Constant.EAllergyList allergy : Constant.EAllergyList.values()) {
             LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
             Chip chip = (Chip) inflater.inflate(R.layout.jsh_chip, null);
+            chip.setId(i++);
             chip.setText(allergy.name());
             chip.setCheckable(true);
+            chip.setOnCheckedChangeListener((buttonView, isChecked) -> Log.d("디버그",buttonView.toString()));
             this.chipVector.add(chip);
             this.allergyChipGroup.addView(chip);
         }

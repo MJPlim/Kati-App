@@ -17,6 +17,12 @@
     <color name="kati_red_ripple">#F8CDD6</color>
     <color name="kati_orange">#F08430</color>
 
+    <color name="kati_main">#FE6F6E</color>
+    <color name="kati_sub">#FE8887</color>
+    <color name="kati_extra">#FFC288</color>
+
+    <color name="naver">#19ce60</color>
+    <color name="kakao">#fae100</color>
 
 <!--구버전 칼라-->
 <!--    <color name="kati_red">#ED2F3B</color>-->

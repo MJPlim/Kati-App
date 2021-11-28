@@ -14,6 +14,7 @@ public class JSHInfoItem extends LinearLayout {
 
     private TextView titleTextView, contentTextView;
     private View view;
+    private String text;
 
     // Constructor
     public JSHInfoItem(Context context, AttributeSet attrs) {
@@ -41,9 +42,13 @@ public class JSHInfoItem extends LinearLayout {
 
 
     public void setContentText(String text) {
-        if (text != null)
+        if (text != null) {
+            this.text=text;
             this.contentTextView.setText(text);
+        }
         else
             this.view.setVisibility(View.GONE);
     }
+
+    public String getText(){return text;}
 }

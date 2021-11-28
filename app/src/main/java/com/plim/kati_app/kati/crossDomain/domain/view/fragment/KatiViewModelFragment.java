@@ -3,7 +3,6 @@ package com.plim.kati_app.kati.crossDomain.domain.view.fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +83,7 @@ public abstract class KatiViewModelFragment extends JSHViewModelFragment{
 
 
     protected KatiDialog showDialog(String title, String message, DialogInterface.OnClickListener listener) {
-        return KatiDialog.simplerAlertDialog(this.getActivity(), title, message, listener);
+        return KatiDialog.simplerAlertDialogString(this.getActivity(), title, message, listener);
     }
 
 }

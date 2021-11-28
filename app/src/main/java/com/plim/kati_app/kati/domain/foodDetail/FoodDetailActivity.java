@@ -16,6 +16,7 @@ import com.plim.kati_app.kati.domain.foodDetail.adapter.ViewPagerAdapter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_DETAIL_ACTIVITY_TAB_ETC;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.FOOD_DETAIL_ACTIVITY_TAB_PRODUCT;
@@ -41,11 +42,13 @@ public class FoodDetailActivity extends AppCompatActivity {
         ViewPagerAdapter fgAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(fgAdapter);
 
+        AtomicInteger id= new AtomicInteger(5000);
         final List<String> tabElement = Arrays.asList(FOOD_DETAIL_ACTIVITY_TAB_PRODUCT,FOOD_DETAIL_ACTIVITY_TAB_REVIEW,FOOD_DETAIL_ACTIVITY_TAB_ETC);
         new TabLayoutMediator(this.tabLayout, this.viewPager2, (tab, position) -> {
             TextView textView = new TextView(FoodDetailActivity.this);
             textView.setText(tabElement.get(position));
             textView.setTextColor(Color.BLACK);
+            textView.setId(id.incrementAndGet());
             textView.setHighlightColor(getResources().getColor(R.color.kati_red, getTheme()));
             textView.setGravity(Gravity.CENTER);
             tab.setCustomView(textView);
