@@ -17,7 +17,7 @@ import static com.plim.kati_app.testUtil.TestTool.USER_PASSWORD_YEEUN;
 
 public class SignUpTest extends KatiTestClass<MainActivity> {
     public static final String SIGN_UP_EMAIL = "ttt@ttt.ttt.tt";
-    public static final String SIGN_UP_EMAIL_PREFIX="tt11";
+    public static final String SIGN_UP_EMAIL_PREFIX="tt15";
 
     @Override
     protected Class getTargetActivityClass() { return MainActivity.class; }
