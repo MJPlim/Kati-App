@@ -28,6 +28,7 @@ import static org.hamcrest.core.AllOf.allOf;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class FoodDetailTest {
+    //
     private String TEST_ITEM="at";
     private String ITEM_NAME="남양 at home 오렌지";
 
