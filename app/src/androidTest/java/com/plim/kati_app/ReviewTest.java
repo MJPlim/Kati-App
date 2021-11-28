@@ -28,6 +28,9 @@ public class ReviewTest extends KatiTestClass<MainActivity> {
         TestTool.sleep();
         this.clickView(20024);
         TestTool.sleep();
+        TestTool.sleep();
+        TestTool.sleep();
+        TestTool.sleep();
         this.clickView(R.id.newFoodItem_productNameTextView);
         this.clickView(5002);
         TestTool.sleep();
@@ -52,6 +55,7 @@ public class ReviewTest extends KatiTestClass<MainActivity> {
         this.clickView(R.id.myKatiFragment_reviewItem);
 
         //수정버튼 클릭
+        TestTool.sleep();
         TestTool.sleep();
         this.clickView(R.id.review_edit);
 
