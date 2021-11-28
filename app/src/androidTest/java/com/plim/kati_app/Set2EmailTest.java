@@ -52,6 +52,7 @@ public class Set2EmailTest {
             onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText("1234567"), closeSoftKeyboard());
             onView(withId(R.id.loginActivity_loginButton)).perform(click());
         }
+        sleep();
         onView(withId(R.id.myKatiFragment_myInfoLayout)).perform(click());
     }
 

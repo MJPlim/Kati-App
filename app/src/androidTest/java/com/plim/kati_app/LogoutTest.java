@@ -41,6 +41,7 @@ public class LogoutTest {
             onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText("sh199919@gmail.com"), closeSoftKeyboard());
             onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText("1234567"), closeSoftKeyboard());
             onView(withId(R.id.loginActivity_loginButton)).perform(click());
+            sleep();
         }
         onView(withId(R.id.myKatiFragment_myInfoLayout)).perform(click());
     }
@@ -50,5 +51,9 @@ public class LogoutTest {
         onView(withId(R.id.myInfoEditFragment_logOutTextView)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.action_mykati)).check(matches(isDisplayed()));
+    }
+
+    private void sleep(){
+        try { Thread.sleep(1000); } catch (InterruptedException ignored) { }
     }
 }

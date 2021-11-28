@@ -31,7 +31,7 @@ public class FindPWTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
-    static final String NEW_PASSWORD = "YKM9S7HL";
+    static final String NEW_PASSWORD = "G0EXU85Q";
 
     @Before
     public void init(){
@@ -52,14 +52,8 @@ public class FindPWTest {
         onView(withId(R.id.loginActivity_findPWTextView)).perform(click());
         onView(withId(R.id.passwordFindActivity_restoreEmailEditText)).perform(typeText("sh199919@gmail.com"), closeSoftKeyboard());
         onView(withId(R.id.passwordFindActivity_submitButton)).perform(click());
-        for(int i=0; i<5; i++){
-            try{
-                onView(withText("임시 비밀번호를 발급하였습니다.")).check(matches(isDisplayed()));
-                break;
-            }catch (NoMatchingViewException e){
-                try { Thread.sleep(1000); } catch (InterruptedException ignored) { }
-            }
-        }
+        try { Thread.sleep(5000); } catch (InterruptedException ignored) { }
+        onView(withText("임시 비밀번호를 발급하였습니다.")).check(matches(isDisplayed()));
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.activity_main)).check(matches(isDisplayed()));
     }
@@ -69,7 +63,7 @@ public class FindPWTest {
         onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText("sh199919@gmail.com"), closeSoftKeyboard());
         onView(withId(R.id.loginActivity_passwordEditText)).perform(typeText(NEW_PASSWORD), closeSoftKeyboard());
         onView(withId(R.id.loginActivity_loginButton)).perform(click());
-
+        try { Thread.sleep(1000); } catch (InterruptedException ignored) { }
         onView(withId(R.id.activity_main)).check(matches(isDisplayed()));
     }
 }

@@ -227,7 +227,8 @@ public class FoodInfoFragment extends KatiFoodFragment {
     }
 
     private void barcodeSearch() {
-        KatiRetrofitTool.getAPI().findByBarcode(new FindFoodByBarcodeRequest(this.barcode)).enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
+        KatiRetrofitTool.getAPI().findByBarcode(new FindFoodByBarcodeRequest(this.barcode))
+                .enqueue(JSHRetrofitTool.getCallback(new FoodDetailRequestCallback(this.getActivity())));
     }
 
     private void checkFavorite(String token) {

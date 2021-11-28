@@ -2,6 +2,7 @@ package com.plim.kati_app.kati.domain.main.search.barcode.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +10,8 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.plim.kati_app.R;
 import com.plim.kati_app.kati.domain.foodDetail.FoodDetailActivity;
+
+import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.DETAIL_PRODUCT_INFO_TABLE_FRAGMENT_FOOD_ID_BARCODE;
 
 
 public class BarcodeActivity extends AppCompatActivity {

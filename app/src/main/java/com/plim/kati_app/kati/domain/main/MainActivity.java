@@ -1,6 +1,10 @@
 package com.plim.kati_app.kati.domain.main;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +30,9 @@ import com.plim.kati_app.kati.domain.main.home.HomeFragment;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_FOOD_ID;
 import static com.plim.kati_app.kati.crossDomain.domain.model.Constant.NEW_DETAIL_ACTIVITY_EXTRA_IS_AD;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class MainActivity extends KatiViewModelActivity {
 
     private KatiDialog dialog;
@@ -42,6 +49,8 @@ public class MainActivity extends KatiViewModelActivity {
 
     @Override
     protected void initializeView() {
+
+
         if (this.findViewById(R.id.mainFragment_bottomNavigation) != null) {
             BottomNavigationView bottomNavigationView = this.findViewById(R.id.mainFragment_bottomNavigation);
             bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
