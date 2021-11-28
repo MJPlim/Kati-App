@@ -27,6 +27,7 @@ public class TestTool {
     }
 
     public static void doLoginIfNotLogin(){
+        //rwar
         onView(withId(R.id.action_mykati)).perform(click());
         onView(withId(R.id.myKatiFragment_loginButton)).perform(click());
         onView(withId(R.id.loginActivity_emaiEditText)).perform(typeText(USER_EMAIL_YEEUN), closeSoftKeyboard());

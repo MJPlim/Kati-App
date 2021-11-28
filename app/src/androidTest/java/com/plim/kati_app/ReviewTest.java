@@ -1,4 +1,4 @@
-package com.plim.kati_app;
+giotpackage com.plim.kati_app;
 
 import com.plim.kati_app.kati.domain.main.MainActivity;
 import com.plim.kati_app.testUtil.KatiTestClass;
