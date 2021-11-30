@@ -1,4 +1,4 @@
-giotpackage com.plim.kati_app;
+package com.plim.kati_app;
 
 import com.plim.kati_app.kati.domain.main.MainActivity;
 import com.plim.kati_app.testUtil.KatiTestClass;
@@ -18,6 +18,7 @@ public class ReviewTest extends KatiTestClass<MainActivity> {
         try{
             TestTool.doLoginIfNotLogin();
         }catch (Exception e) { }
+        ////////
     }
 
     //리뷰쓰기
@@ -27,7 +28,6 @@ public class ReviewTest extends KatiTestClass<MainActivity> {
         this.clickView(R.id.action_search);
         TestTool.sleep();
         this.clickView(20024);
-        TestTool.sleep();
         TestTool.sleep();
         TestTool.sleep();
         TestTool.sleep();
